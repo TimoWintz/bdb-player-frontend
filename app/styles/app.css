@@ -20,7 +20,7 @@ a {
 .ember-view {
 	height: 100%;
 }
-#top-menu .item, #bottom-menu .item {
+#top-menu div.item, #bottom-menu div.item {
     padding-top: 0;
     padding-bottom: 0;
 }
@@ -31,6 +31,11 @@ a {
 	margin: 0;
     margin-top: 3rem;
     margin-bottom: 3rem;
+}
+#play-queue {
+    padding: 2rem;
+    height: 100%;
+    overflow-y: scroll;
 }
 #control-bar {
     margin: auto !important;

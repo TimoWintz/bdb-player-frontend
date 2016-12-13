@@ -1,14 +1,8 @@
 <div class="ui top visible borderless sidebar menu" id="top-menu">
     <div class="ui container"  id ="control-bar">
-        <div class="item">
-            <a {{action ""}}>Albums</a>
-        </div>
-        <div class="item">
-            <a {{action ""}}>All tracks</a>
-        </div>
-        <div class="item">
-            <a {{action ""}}>Current queue</a>
-        </div>
+        {{#link-to "index" class="item"}}Albums{{/link-to}}
+        {{#link-to "tracks" class="item"}}All tracks{{/link-to}}
+        {{#link-to "queue" class="item"}}Current queue{{/link-to}}
         <div class="right item">
             <div class="mini ui compact search">
                 <input class="prompt" placeholder="Search for tracks..." type="text">
