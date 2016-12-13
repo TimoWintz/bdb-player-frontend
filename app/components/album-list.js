@@ -15,7 +15,7 @@ export default Ember.Component.extend({
         },
         playAlbum: function(album) {
             var album_id = album.get('id');
-            var tracks = album.get('store').query('item', 'album_id:'+album_id.toString());
+            var tracks = album.get('store').query('item', {filter : {album_id : album_id.toString()}});
             tracks.then(function(tracks) {
                 var sortedTracks =  trackList.create({tracks : tracks}).get('sortedTracks');
                 var track = sortedTracks.shiftObject();
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
             var first = true;
             group.items.map(function(album) {
                 var album_id = album.get('id');
-                var tracks = album.get('store').query('item', 'album_id:'+album_id.toString());
+                var tracks = album.get('store').query('item', {filter : {album_id : album_id.toString()}});
                 tracks.then(function(tracks) {
                     var sortedTracks =  trackList.create({tracks : tracks}).get('sortedTracks');
                     if (first) {

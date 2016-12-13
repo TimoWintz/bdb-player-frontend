@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
                 this.set('shownAlbums', shownAlbums);
                 group.items.map(function(item) {
                     var album_id = item.get('id');
-                    var tracks = item.get('store').query('item', 'album_id:'+album_id.toString());
+                    var tracks = item.get('store').query('item', {filter : {album_id : album_id.toString()}});
                     tracks.then(function(tracks) {
                         var sortedTracks =  trackList.create({tracks : tracks}).get('sortedTracks');
                         shownAlbums.pushObject({tracks : sortedTracks, album : item.get('album')});
