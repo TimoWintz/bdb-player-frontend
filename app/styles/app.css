@@ -6,6 +6,10 @@ body {
 	top: 0;
 	left: 0;
 	width: 100%;
+    cursor: default !important;
+}
+a {
+    cursor: pointer !important;
 }
 #album-list a {
     color: rgba(0, 0, 0, 0.87);
@@ -16,13 +20,17 @@ body {
 .ember-view {
 	height: 100%;
 }
-
+#top-menu .item, #bottom-menu .item {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 #app-content {
-	height: calc(100% - 4rem);
+	height: calc(100% - 6rem);
 	top: 0;
 	padding: 0;
 	margin: 0;
-    margin-top: 4rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 #control-bar {
     margin: auto !important;
