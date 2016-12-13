@@ -1,0 +1,24 @@
+<div class="ui list" id="album-list">
+    {{#each artists as |group|}} 
+        <div class="item">
+            {{#hide-able as |tpl|}}
+                {{#if tpl.isHeader}}
+                    <a {{action 'showArtist' group}} {{action 'playArtist' group on='doubleClick'}}>{{group.value}}</a>
+                {{else if tpl.isBody}}
+                    <div class="content">
+                        <div class="ui tiny list">
+                            {{#each group.items as |album|}}
+                                <div class="item">
+                                    <div class="content">
+                                        <a {{action 'showAlbum' album}} {{action 'playAlbum' album on='doubleClick'}}><i class="folder icon"></i>
+                                            {{album.album}}</a>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/if}}
+            {{/hide-able}}
+        </div>
+    {{/each}}
+</div>

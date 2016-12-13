@@ -1,0 +1,11 @@
+<div class="item header">
+	Play queue
+</div>
+	{{#each playQueue as |track|}}
+		<div class="item">
+			<div class="content">
+				<a class="header">{{track.title}}</a>
+				<div class="description">{{track.artist}}</div>
+			</div>
+		</div>
+	{{/each}}

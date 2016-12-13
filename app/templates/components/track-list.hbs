@@ -1,0 +1,35 @@
+{{#each shownAlbums as |album|}}
+    <table class="ui selectable table">
+        <thead>
+            <tr {{action "playAlbum" album track on="doubleClick"}}><th colspan="3">
+                    {{album.album}} 
+                </th>
+                <th>
+                    <a href="" {{action "addAlbum" album}}><i class="plus icon"></i></a>
+                </th>
+                <th>
+                    <a href="" {{action "playAlbum" album}}><i class="play icon"></i></a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each album.tracks as |track|}}
+                <tr {{action "playTrack" shownAlbums track on="doubleClick"}} class={{if track.isPlaying "active"}}>
+                    <td class="two wide">{{track.track}}
+                        {{#if track.isPlaying}}
+                            <i class="volume up icon"></i>
+                        {{/if}}
+                    </td>
+                    <td class="ten wide">{{track.title}}</td>
+                    <td class="two wide right aligned">{{format-duration track.length "sec"}}</td>
+                    <td class="one wide">
+                        <a href="" {{action "addTrack" track}}><i class="plus icon"></i></a>
+                    </td>
+                    <td class="one wide">
+                        <a href="" {{action "playTrack" shownAlbums track}}><i class="play icon"></i></a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{/each}}
