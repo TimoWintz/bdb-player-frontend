@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
     lastVolume : 0,
     muted : false,
     percentPlayed : Ember.computed('askedPosition', 'hifi.position', 'hifi.duration', { 
-        get(key) {
+        get() {
             var pos = this.get('hifi.position');
             return Math.floor(100*pos/this.get('hifi.duration'));
         },
@@ -61,7 +61,7 @@ export default Ember.Controller.extend({
             if (this.playQueue[0]) {
                 var track = this.playQueue[0];
                 setCurrentTrack.call(this, track);
-                var urls = 'item/' + track.id.toString() + '/file';
+                var urls = 'file/' + track.id.toString();
                 this.get('hifi').play(urls).then(({sound}) => {
                     sound.on("audio-ended", function() { 
                         this.playQueue.shiftObject();
@@ -69,7 +69,7 @@ export default Ember.Controller.extend({
                             this.send("play");
                         }
                     }.bind(this));
-                }, (error) => {
+                }, () => {
                     this.playQueue.shiftObject();
                     if (this.playQueue[0]) {
                         this.send("play");

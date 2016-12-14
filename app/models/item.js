@@ -7,5 +7,6 @@ export default DS.Model.extend({
     disc: DS.attr(),
     length: DS.attr(),
     artist: DS.attr(),
+    format: DS.attr('string'),
     isPlaying: false
 });

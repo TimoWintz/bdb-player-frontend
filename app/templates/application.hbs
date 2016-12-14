@@ -1,48 +1,54 @@
-<div class="ui top visible borderless sidebar menu" id="top-menu">
-    <div class="ui container"  id ="control-bar">
-        {{#link-to "index" class="item"}}Albums{{/link-to}}
-        {{#link-to "tracks" class="item"}}All tracks{{/link-to}}
-        {{#link-to "queue" class="item"}}Current queue{{/link-to}}
-        <div class="right item">
-            <div class="mini ui compact search">
-                <input class="prompt" placeholder="Search for tracks..." type="text">
-                <div class="results"></div>
-            </div>
+<div class="ui borderless visible stackable top sidebar menu">
+    {{#link-to "index" class="item"}}Albums{{/link-to}}
+    {{#link-to "tracks" class="item"}}All tracks{{/link-to}}
+    {{#link-to "queue" class="item"}}Current queue{{/link-to}}
+    <div class="item">
+        <div class="mini ui compact search">
+            <input class="prompt" placeholder="Search for tracks..." type="text">
+            <div class="results"></div>
         </div>
-    </div>
-</div>
-<div class="ui bottom visible sidebar borderless menu" id="bottom-menu">
-    <div class="ui container"  id ="control-bar">
-        <div class="item">
-            <div class="ui compact buttons">
-                <button {{action "togglePause"}} class="ui compact icon button">
-                    {{#if hifi.isPlaying}}
-                        <i class="pause icon"></i>            
-                    {{else}}
-                        <i class="play icon"></i>
-                    {{/if}}
-                </button>
-                <button {{action "skip"}} class="ui compact icon button"><i class="step forward icon"></i></button>
-            </div>
-            <div class="ui compact basic labeled button" style="margin-left: 1em">
-                <button class="ui compact basic icon button" {{action "toggleMute"}}><i class="volume up icon"></i></button>
-                <div class="ui basic label" style="padding-top:0; padding-bottom:0">
-					{{ui-slider id="volume-slider" value=hifi.volume min=0 max=100 tooltip="hide" handle="none"}}
-                </div>
-            </div>
-        </div>
-        <div class="item">
-			{{ui-slider id="track-progress" value=percentPlayed min="0" max="100" tooltip="hide"}}
-        </div>
-        <div class="item">
-            {{format-duration hifi.position}} / {{format-duration hifi.duration}}
-        </div>
-            <div class="item">
-                <div class="content">
-                    <a class="header">{{currentTrack.title}}</a>
-                    <div class="description">{{currentTrack.artist}}</div>
-                </div>
-            </div>
     </div>
 </div>
 {{outlet}}
+<div class="ui borderless visible stackable bottom sidebar container menu">
+    <div class="item">
+        <div style="margin: auto">
+        <div class="ui compact buttons">
+            <button {{action "togglePause"}} class="ui compact icon button">
+                {{#if hifi.isPlaying}}
+                    <i class="pause icon"></i>            
+                {{else}}
+                    <i class="play icon"></i>
+                {{/if}}
+            </button>
+            <button {{action "skip"}} class="ui compact icon button"><i class="step forward icon"></i></button>
+        </div>
+        </div>
+    </div>
+    <div class="computer only item">
+        <div style="margin: auto">
+        <div class="ui compact basic labeled button" style="margin-left: 1em">
+            <button class="ui compact basic icon button" {{action "toggleMute"}}><i class="volume up icon"></i></button>
+            <div class="ui basic label" style="padding-top:0; padding-bottom:0">
+                {{ui-slider id="volume-slider" value=hifi.volume min=0 max=100 tooltip="hide" handle="none"}}
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="item">
+        <div style="margin: auto">
+        {{ui-slider id="track-progress" value=percentPlayed min="0" max="100" tooltip="hide"}} 
+        <div id="track-progress-num">
+        {{format-duration hifi.position}}/{{format-duration hifi.duration}}
+        </div>
+        </div>
+    </div>
+    <div class="item">
+        <div style="margin: auto">
+        <div class="content">
+            <a class="header">{{currentTrack.title}}</a>
+            <div class="description">{{currentTrack.artist}}</div>
+        </div>
+        </div>
+    </div>
+</div>
