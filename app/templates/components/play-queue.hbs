@@ -1,9 +1,0 @@
-<div class="ui relaxed list" id="play-queue">
-    {{#each playQueue as |track|}}
-        <div class="item">
-            <div class="content">
-                <div class={{if track.isPlaying "header" "description"}}>{{track.artist}} - {{track.title}}</div>
-            </div>
-        </div>
-    {{/each}}
-</div>

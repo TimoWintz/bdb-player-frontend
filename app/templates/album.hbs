@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{model.album.albumartist}}</h1>
+        <h2>{{model.album.album}}</h2>
+    </div>
+    <ul class="list-group">
+        {{#each model.tracks as |track|}} 
+            <button type="button" class="list-group-item">
+                {{track.title}}<span class="pull-right">{{format-duration track.length "sec"}}</span>
+            </button>
+        {{/each}}
+    </ul>
+</div>

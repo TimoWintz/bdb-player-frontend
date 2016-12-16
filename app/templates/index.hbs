@@ -1,8 +1,11 @@
-<div class="ui two column grid container" id="app-content">
-    <div class="five wide column">
-        {{album-list artists=artists show="showAlbums" addToPlayQueue="addToPlayQueue" playTrack="playTrack"}}
-    </div>
-    <div class="eleven wide column">
-        {{track-list shownAlbums=shownAlbums addToPlayQueue="addToPlayQueue" playTrack="playTrack"}}
-    </div>
+<div class="panel panel-default">
+    <ul class="list-group">
+        {{#each model as |album|}} 
+            <button {{action "routeToAlbum" album.id on="click"}}type="button" class="list-group-item">
+                {{album.albumartist}} - {{album.album}}<span class="pull-right">{{album.year}}</span>
+            </button>
+        {{/each}}
+        {{#infinity-loader infinityModel=model}}
+        {{/infinity-loader}}
+    </ul>
 </div>
