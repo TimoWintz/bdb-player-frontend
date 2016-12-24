@@ -1,15 +1,19 @@
 <table class="table">
-    {{#each model as |item|}}
         <tbody>
+    {{#each model as |item|}}
             <tr class="nowrap">
-                <td class="track"> {{item.track}} </td>
-                <td> {{item.artist}} </td>
-                <td> {{item.title}} </td>
+                <td class="track">{{item.track}} </td>
+                <td>{{item.artist}}</td>
+                <td>
+                    {{#link-to "album" item.album_id (query-params play=item.id)}}
+                        {{item.title}}
+                    {{/link-to}}
+                </td>
                 <td> {{item.album}} </td>
                 <td class="duration"> {{format-duration item.length "sec"}} </td>
             </tr>
-        </tbody>
     {{/each}}
+        </tbody>
     {{#infinity-loader infinityModel=model}}
     {{/infinity-loader}}
 </table>

@@ -1,0 +1,24 @@
+<div class="btn-group navbar-left navbar-btn pull-left on">
+    {{#if hifi.isPlaying}}
+        <button {{action "hifi.pause"}} type="button" class="btn btn-primary">
+            {{fa-icon "pause" fixedWidth=true}}
+        </button>
+    {{else}}
+        <button {{action "queue.play"}} type="button" class="btn btn-primary">
+            {{fa-icon "play" fixedWidth=true}}
+        </button>
+    {{/if}}
+    <button {{action "queue.skip"}} type="button" class="btn btn-primary">
+        {{fa-icon "step-forward" fixedWidth=true}}
+    </button>
+</div>
+<div class="collapse navbar-collapse navbar-left">
+    <div class="btn-group navbar-left navbar-btn pull-left on" style="display:flex">
+        <button class="btn btn-primary" type="button" {{action "toggleMute"}}>
+            {{fa-icon "volume-up" fixedWidth=true}}
+        </button>
+    </div>
+</div>
+<div class="navbar-left navbar-text no-collapse">
+    {{format-duration hifi.position}} / {{format-duration hifi.duration}}
+</div>

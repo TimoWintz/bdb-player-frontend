@@ -2,6 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
     album: DS.attr(),
+    album_id: DS.attr(),
     track: DS.attr(),
     title: DS.attr(),
     disc: DS.attr(),

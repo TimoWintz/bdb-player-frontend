@@ -58,6 +58,10 @@ body {
     margin-left: 1em;
     margin-right: 1em;
 }
+.btn.side-margin {
+   margin-left: 1em;
+   margin-right: 1em;
+}
 /*no collapse*/
 
 .navbar-collapse.collapse.off {
@@ -78,13 +82,14 @@ body {
     float: right!important;
 }
 .table {
+    width: 100%;
     table-layout:fixed;
 }
-.table td.track {
-    width: 2em;
+.table td.track, .table th.track {
+    width: 4em;
     text-align:right;
 }
-.table td.duration {
+.table td.duration, .table th.duration {
     width: 4em;
     text-align:right;
 }
@@ -94,4 +99,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 
+}
+.nav-tabs {
+    border-bottom: none !important;
 }

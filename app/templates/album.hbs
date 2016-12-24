@@ -1,13 +1,39 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h1>{{model.album.albumartist}}</h1>
-        <h2>{{model.album.album}}</h2>
+        <div class="media">
+            <span class="media-left btn-group-vertical" href="">
+                <button type="button" {{action "play"}} class="btn btn-primary">
+                    {{fa-icon "play" fixedWidth=true size=2}}
+                </button>
+                <button type="button" {{action "add"}} class="btn btn-primary">
+                    {{fa-icon "plus" fixedWidth=true size=2}}
+                </button>
+            </span>
+            <div class="media-body">
+                <h3>{{model.album.album}}</h3>
+                <h4>{{model.album.albumartist}}</h4>
+            </div>
+        </div>
     </div>
-    <ul class="list-group">
-        {{#each model.tracks as |track|}} 
-            <button type="button" class="list-group-item">
-                {{track.title}}<span class="pull-right">{{format-duration track.length "sec"}}</span>
-            </button>
-        {{/each}}
-    </ul>
+    <table class="table relaxed table-hover">
+        <tbody>
+            {{#each model.tracks as |track|}} 
+                <tr class={{if (is-equal track hifi.currentSound.track) "nowrap active" "nowrap"}}>
+                    <td {{action "play" track.id}} class="track">
+                        {{#if (is-equal track hifi.currentSound.track)}}
+                            {{fa-icon "volume-up"}}
+                    {{/if}}
+                        {{track.track}}
+                    </td>
+                        <td {{action "play" track.id}}>{{track.title}}</td>
+                        <td {{action "play" track.id}} class="duration">{{format-duration}}</td>
+                    <td class="duration">
+                        <a href="" {{action "add" track}}>
+                            {{fa-icon "plus" fixedWidth=true}}
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>

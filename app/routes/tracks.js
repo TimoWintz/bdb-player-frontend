@@ -3,6 +3,7 @@ import InfinityRoute from "ember-infinity/mixins/route";
  
 export default Ember.Route.extend(InfinityRoute, {
     filter: Ember.inject.service(),
+    queue: Ember.inject.service('play-queue'),
     perPageParam: "page[size]",              // instead of "per_page" 
     pageParam: "page[number]",                  // instead of "page" 
     totalPagesParam: "meta.total-pages",    // instead of "meta.total_pages" 
@@ -18,5 +19,5 @@ export default Ember.Route.extend(InfinityRoute, {
         this.addObserver('filter.filter', function() {
             this.refresh();
         });
-    }
+    },
 });
