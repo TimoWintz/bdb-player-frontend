@@ -26,7 +26,7 @@
                         {{track.track}}
                     </td>
                         <td {{action "play" track.id}}>{{track.title}}</td>
-                        <td {{action "play" track.id}} class="duration">{{format-duration}}</td>
+                        <td {{action "play" track.id}} class="duration">{{format-duration track.length "sec"}}</td>
                     <td class="duration">
                         <a href="" {{action "add" track}}>
                             {{fa-icon "plus" fixedWidth=true}}
