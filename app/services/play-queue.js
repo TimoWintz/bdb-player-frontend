@@ -61,6 +61,7 @@ export default Ember.Service.extend({
                         that.set('currentTrack', next);
                         sound.track = next;
                         sound.on('audio-ended', () => { 
+                            that.set('hifi.currentSound', null);
                             that.play();
                         });
                         sound.on('audio-played', () => { 
