@@ -21,7 +21,7 @@ export default Ember.Route.extend(InfinityRoute, {
     },
     actions: {
         routeToAlbum(album_id) {
-            this.transitionTo("album", album_id);
+            this.transitionTo("album", album_id, { queryParams: { play: null }});
         }
     }
 });
