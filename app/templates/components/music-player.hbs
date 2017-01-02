@@ -14,14 +14,16 @@
 </span>
 <span class="navbar-left navbar-btn">
     <button class="btn btn-primary" type="button" {{action "toggleMute"}}>
-    {{#if queue.muted}}
-        {{fa-icon "volume-off" fixedWidth=true}}
-    {{else}}
-        {{fa-icon "volume-up" fixedWidth=true}}
-    {{/if}}
+        {{#if queue.muted}}
+            {{fa-icon "volume-off" fixedWidth=true}}
+        {{else}}
+            {{fa-icon "volume-up" fixedWidth=true}}
+        {{/if}}
     </button>
 </span>
 <span class="navbar-text">
-    <span>{{hifi.currentSound.track.artist}} {{hifi.currentSound.track.title}}</span>
-    <span>{{format-duration hifi.position}} / {{format-duration hifi.duration}}</span>
+    {{#if hifi.currentSound}} 
+        <span><b>{{hifi.currentSound.track.artist}}</b> - {{hifi.currentSound.track.title}} | </span>
+        <span>{{format-duration hifi.position}} / {{format-duration hifi.duration}}</span>
+    {{/if}}
 </span>
