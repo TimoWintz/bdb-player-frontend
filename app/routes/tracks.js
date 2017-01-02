@@ -9,7 +9,7 @@ export default Ember.Route.extend(InfinityRoute, {
     totalPagesParam: "meta.total-pages",    // instead of "meta.total_pages" 
     model() {
             return this.infinityModel("item", {
-                perPage: 30,
+                perPage: 50,
                 startingPage: 1,
                 'filter[search]' : this.get('filter.filter')
             });
