@@ -6,6 +6,12 @@
             </button>
         {{/each}}
         {{#infinity-loader infinityModel=model}}
+            {{#if model.reachedInfinity}}
+            {{else}}
+                <div class="spinner">
+                    <i class="fa fa-spinner fa-spin fa-4x"></i>
+                </div>
+            {{/if}}
         {{/infinity-loader}}
     </ul>
 </div>
