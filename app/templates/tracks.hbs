@@ -1,6 +1,6 @@
 <table class="table">
-        <tbody>
-    {{#each model as |item|}}
+    <tbody>
+        {{#each model as |item|}}
             <tr class="nowrap">
                 <td class="track">{{item.track}} </td>
                 <td>{{item.artist}}</td>
@@ -11,9 +11,20 @@
                 </td>
                 <td> {{item.album}} </td>
                 <td class="duration"> {{format-duration item.length "sec"}} </td>
+                <td class="duration">
+                    <a href="" {{action "add" item}}>
+                        {{fa-icon "plus" fixedWidth=true}}
+                    </a>
+                </td>
             </tr>
-    {{/each}}
-        </tbody>
-    {{#infinity-loader infinityModel=model}}
-    {{/infinity-loader}}
+        {{/each}}
+    </tbody>
 </table>
+{{#infinity-loader infinityModel=model}}
+    {{#if model.reachedInfinity}}
+    {{else}}
+        <div class="spinner">
+            <i class="fa fa-spinner fa-spin fa-4x"></i>
+        </div>
+    {{/if}}
+{{/infinity-loader}}
