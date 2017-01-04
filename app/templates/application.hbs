@@ -1,6 +1,6 @@
 <!-- Fixed navbar -->
 <nav class="navbar navbar-fixed-top navbar-default">
-    <div class="container">
+    <div class="container-fluid">
         {{#bs-nav type="tabs"}}
             {{#bs-nav-item class="navbar-btn"}}
                 {{#link-to "index"}}Albums{{/link-to}}
@@ -8,22 +8,25 @@
             {{#bs-nav-item class="navbar-btn"}}
                 {{#link-to "tracks"}}Tracks{{/link-to}}
             {{/bs-nav-item}}
-            {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "queue"}}Queue{{/link-to}}
-            {{/bs-nav-item}}
-            {{#bs-nav-item class="navbar-right navbar-btn"}}
-                    {{filter-box}}
+            {{#bs-nav-item id="filter-box" class="navbar-btn"}}
+                {{filter-box}}
             {{/bs-nav-item}}
         {{/bs-nav}}
     </div>
 </nav>
-
-<div class="container">
-    {{outlet}}
-</div> <!-- /container -->
-
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        {{currently-playing}}
+    </div>
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            {{outlet}}
+        </div> <!-- /container -->
+    </div>
+</div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
+    <div class="container-fluid">
         {{music-player}}
     </div>
 </nav>

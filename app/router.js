@@ -7,9 +7,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-    this.route('queue');
-    this.route('tracks');
-    this.route('album', { path: '/album/:album_id' });
+  this.route('tracks');
+  this.route('album', { path: '/album/:album_id' });
 });
 
 export default Router;
