@@ -16,7 +16,10 @@
                             {{/bs-dropdown-menu}}
                         {{/bs-dropdown}}
                     </div>
-                    <div class="media-body" {{action "toggleAlbum"}}>
+                    <div class="media-left">
+                        {{#play-queue-helper replace=true play=true type="album" objectId=album.id}}<img src="/assets/images/albumicon.svg">{{/play-queue-helper}}
+                    </div>
+                    <div class="media-body" {{action "toggleAlbum" album.id}}>
                         <h4>{{album.album}}</h4>
                         {{album.albumartist}}
                     </div>
@@ -28,6 +31,8 @@
         {{/each}}
     </div>
 </div>
- {{#bs-modal open=showAlbum footer=false}}
-     {{album-view albumId=25}}
- {{/bs-modal}}
+{{#bs-modal open=showAlbum footer=false}}
+    {{#if selectedAlbum}}
+        {{album-view albumId=selectedAlbum}}
+    {{/if}}
+{{/bs-modal}}

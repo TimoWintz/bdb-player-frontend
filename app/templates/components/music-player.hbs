@@ -26,7 +26,10 @@
 </span>
 <span id="song-status" class="navbar-text">
     {{#if hifi.currentSound}} 
-        <span><b>{{hifi.currentSound.track.artist}}</b> - {{hifi.currentSound.track.title}} | </span>
-        <span>{{format-duration hifi.position}} / {{format-duration hifi.duration}}</span>
+        <span>
+        {{format-duration hifi.position}} / {{format-duration hifi.duration}} | 
+        <b>{{hifi.currentSound.track.artist}}</b> - {{hifi.currentSound.track.title}}  
+        </span>
+        {{track-progress id="track-progress" position=hifi.position duration=hifi.duration}}
     {{/if}}
 </span>
