@@ -20,7 +20,6 @@ export default Ember.Component.extend({
                 album.map(function(item) {
                     this.get('playQueue').add(item);
                     if (first && this.get('play')) {
-                        this.get('playQueue').stop();
                         this.get('playQueue').set('index', numberOfTracks);
                         this.get('playQueue').play();
                     }
@@ -32,7 +31,6 @@ export default Ember.Component.extend({
             track.then(function() {
                 this.get('playQueue').add(track);
                 if (this.get('play')) {
-                    this.get('playQueue').stop();
                     this.get('playQueue').set('index', numberOfTracks);
                     this.get('playQueue').play();
                 }

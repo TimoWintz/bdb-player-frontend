@@ -47,35 +47,44 @@ export default Ember.Service.extend({
         }
     }}),
     stop() {
-        let current = this.get('hifi.currentSound');
+        var current = this.get('hifi.currentSound'); 
         if (current) {
-            current.stop();
-            this.set('index', 0);
-            this.set('hifi.currentSound', null);
+            this.get('hifi').stop();
         }
     },
     play() {
-        var current = this.get('hifi.currentSound'); 
-        if (current) {
+        var currentIndex = this.get('index');
+        var track = this.get('items')[currentIndex];
+        var current = this.get('hifi.currentSound');
+        this.stop();
+        if (current && track.id === current.track.id) {
             return this.get('hifi').play(current);
-        } else {
+        }
+        else {
             return new RSVP.Promise(function(resolve, reject) {
-                var track = this.get('items')[this.get('index')];
                 if (track) {
                     let url = '/file/' + track.get('id').toString();
                     this.get('hifi').play(url).then(({sound}) => {
                         sound.set('track', track);
-                        sound.on('audio-ended', () => { 
-                            this.set('hifi.currentSound', null);
+                        sound.on('audio-ended', (resume=true) => { 
                             if (!this.get('isLast')) {
-                                this.incrementProperty('index');
-                                this.play();
+                                this.set('index', currentIndex + 1);
+                                this.play().then(() => {
+                                    if (!resume) {
+                                        this.get('hifi').pause();
+                                    }
+                                });
                             }
                         });
                         sound.on('audio-played', () => { 
+                            if (!this.get('isLast')) {
+                                var next = this.get('items')[currentIndex+1];
+                                let url = '/file/' + next.get('id').toString();
+                                this.get('hifi').load(url);
+                            }
                             resolve();
                         });
-                    }).catch(error => {
+                    }.bind(this)).catch(error => {
                         reject(error);
                     });
                 }
@@ -88,23 +97,9 @@ export default Ember.Service.extend({
     skip() {
         var current = this.get('hifi.currentSound'); 
         var resume = this.get('hifi.isPlaying');
-        console.log('skip');
         if (current) {
-            if (!this.get('isLast')) {
-                this.incrementProperty('index');
-                current.stop();
-                this.set('hifi.currentSound', null);
-                this.play().then(function() {
-                    if (!resume) {
-                        this.get('hifi').pause();
-                    }
-                }.bind(this));
-            }
-            else {
-                current.stop();
-                this.set('hifi.currentSound', null);
-                console.log('is last');
-            }
+            this.get('hifi').stop();
+            current.trigger('audio-ended', resume);
         }
     },
     previous() {
@@ -115,7 +110,6 @@ export default Ember.Service.extend({
                 this.decrementProperty('index');
             }
             current.stop();
-            this.set('hifi.currentSound', null);
             this.play().then(function() {
                 if (!resume) {
                     this.get('hifi').pause();

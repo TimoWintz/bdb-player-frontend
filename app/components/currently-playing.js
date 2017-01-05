@@ -6,7 +6,6 @@ export default Ember.Component.extend({
     currentTrack: Ember.computed.alias('hifi.currentSound.currentTrack'),
     actions : {
         switchTrack(num) {
-            this.get('queue').stop();
             this.set('queue.index', num);
             this.get('queue').play();
         }

@@ -8,7 +8,6 @@ export default Ember.Component.extend({
     }),
     click(evt) {
         var posX = this.$().offset().left
-        console.log(posX);
         var width = this.$().width(); 
         var relPos = (evt.pageX - posX)/width;
         this.set('position', relPos*this.get('duration'));
