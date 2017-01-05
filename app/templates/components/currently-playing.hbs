@@ -1,0 +1,20 @@
+<div class="sidebar-nav panel">
+    <div class="panel-heading">
+        <h3>
+            Currently playing
+        </h3>
+    </div>
+    <div class="list-group">
+        {{#each queue.items as |item|}}
+            <a class="list-group-item">
+                <div class="media-body">
+                    <h4 class="media-heading">{{item.title}}</h4>
+                    {{item.artist}}
+                </div>
+                <div class="media-right">
+                    {{format-duration item.length "sec"}}
+                </div>
+            </a>
+        {{/each}}
+    </div>
+</div>
