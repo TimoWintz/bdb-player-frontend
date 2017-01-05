@@ -1,17 +1,31 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="media">
-            <span class="media-left btn-group-vertical" href="">
-                <button type="button" {{action "play"}} class="btn btn-primary">
-                    {{fa-icon "play" fixedWidth=true size=2}}
-                </button>
-                <button type="button" {{action "add"}} class="btn btn-primary">
-                    {{fa-icon "plus" fixedWidth=true size=2}}
-                </button>
-            </span>
+            <div class="media-left">
+                {{#bs-dropdown}}
+                    {{#bs-dropdown-toggle}}
+                        {{fa-icon "caret-down" size=4}}
+                    {{/bs-dropdown-toggle}}
+                    {{#bs-dropdown-menu}}
+                        <li>{{#play-queue-helper replace=true play=true type="album" objectId=model.album.id}}Replace queue and play{{/play-queue-helper}}</li>
+                        <li>{{#play-queue-helper replace=false play=true type="album" objectId=model.album.id}}Add to queue and play{{/play-queue-helper}}</li>
+                        <li>{{#play-queue-helper replace=true play=false type="album" objectId=model.album.id}}Replace queue{{/play-queue-helper}}</li>
+                        <li>{{#play-queue-helper replace=false play=false type="album" objectId=model.album.id}}Add to queue{{/play-queue-helper}}</li>
+                        <li>{{#link-to "album" model.album.id (query-params play=null)}}View album{{/link-to}}</li>
+                    {{/bs-dropdown-menu}}
+                {{/bs-dropdown}}
+            </div>
+            <div class="media-left">
+                {{#link-to "album" album.id}}
+                    <img src="/assets/images/albumicon.svg">
+                {{/link-to}}
+            </div>
             <div class="media-body">
-                <h3>{{model.album.album}}</h3>
-                <h4>{{model.album.albumartist}}</h4>
+                <h4>{{model.album.album}}</h4>
+                {{model.album.albumartist}}
+            </div>
+            <div class="media-right">
+                {{model.album.year}}
             </div>
         </div>
     </div>
@@ -19,19 +33,27 @@
         <tbody>
             {{#each model.tracks as |track|}} 
                 <tr class={{if (is-equal track hifi.currentSound.track) "nowrap active" "nowrap"}}>
-                    <td {{action "play" track.id}} class="track">
+                    <td class="col-caret">
+                        {{#bs-dropdown}}
+                            {{#bs-dropdown-toggle}}
+                                {{fa-icon "caret-down"}}
+                            {{/bs-dropdown-toggle}}
+                            {{#bs-dropdown-menu}}
+                                <li>{{#play-queue-helper replace=true play=true type="track" objectId=track.id}}Replace queue and play{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=false play=true type="track" objectId=track.id}}Add to queue and play{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=true play=false type="track" objectId=track.id}}Replace queue{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=false play=false type="track" objectId=track.id}}Add to queue{{/play-queue-helper}}</li>
+                            {{/bs-dropdown-menu}}
+                        {{/bs-dropdown}}
+                    </td>
+                    <td class="track">
                         {{#if (is-equal track hifi.currentSound.track)}}
                             {{fa-icon "volume-up"}}
-                    {{/if}}
+                        {{/if}}
                         {{track.track}}
                     </td>
-                        <td {{action "play" track.id}}>{{track.title}}</td>
-                        <td {{action "play" track.id}} class="duration">{{format-duration track.length "sec"}}</td>
-                    <td class="duration">
-                        <a href="" {{action "add" track}}>
-                            {{fa-icon "plus" fixedWidth=true}}
-                        </a>
-                    </td>
+                    <td>{{track.title}}</td>
+                    <td class="duration">{{format-duration track.length "sec"}}</td>
                 </tr>
             {{/each}}
         </tbody>

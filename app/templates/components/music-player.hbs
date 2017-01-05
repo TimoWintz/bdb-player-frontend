@@ -1,4 +1,7 @@
 <span class="btn-group navbar-btn navbar-left">
+    <button {{action "previous"}} type="button" class="btn btn-primary">
+        {{fa-icon "step-backward" fixedWidth=true}}
+    </button>
     {{#if hifi.isPlaying}}
         <button {{action "pause"}} type="button" class="btn btn-primary">
             {{fa-icon "pause" fixedWidth=true}}

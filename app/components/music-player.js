@@ -35,6 +35,9 @@ export default Ember.Component.extend({
         },
         skip() {
             this.get('queue').skip();
+        },
+        previous() {
+            this.get('queue').previous();
         }
     }
 });

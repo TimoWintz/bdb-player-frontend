@@ -9,10 +9,10 @@
                             {{fa-icon "caret-down" size=4}}
                             {{/bs-dropdown-toggle}}
                             {{#bs-dropdown-menu}}
-                                <li>{{#play-queue-helper replace=true play=true type="album" objId=album.id}}Replace queue and play{{/play-queue-helper}}</li>
-                                <li>{{#play-queue-helper replace=false play=true type="album" objId=album.id}}Add to queue and play{{/play-queue-helper}}</li>
-                                <li>{{#play-queue-helper replace=true play=false type="album" objId=album.id}}Replace queue{{/play-queue-helper}}</li>
-                                <li>{{#play-queue-helper replace=false play=false type="album" objId=album.id}}Add to queue{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=true play=true type="album" objectId=album.id}}Replace queue and play{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=false play=true type="album" objectId=album.id}}Add to queue and play{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=true play=false type="album" objectId=album.id}}Replace queue{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=false play=false type="album" objectId=album.id}}Add to queue{{/play-queue-helper}}</li>
                                 <li>{{#link-to "album" album.id (query-params play=null)}}View album{{/link-to}}</li>
                             {{/bs-dropdown-menu}}
                         {{/bs-dropdown}}

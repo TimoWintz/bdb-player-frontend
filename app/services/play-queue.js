@@ -5,7 +5,10 @@ export default Ember.Service.extend({
     items: null,
     hifi: Ember.inject.service(),
     lastVolume: null,
-    index: null,
+    index: 0,
+    isLast : Ember.computed('index', 'items.length', function() {
+        return this.get('index') === (this.get('items.length') - 1);
+    }),
     shuffle: false,
     repeat: false,
     init() {
@@ -24,6 +27,7 @@ export default Ember.Service.extend({
 
     empty() {
         this.get('items').setObjects([]);
+        this.set('index', 0);
     },
 
     muted: Ember.computed('hifi.volume', 'lastVolume', { get() {
@@ -43,29 +47,30 @@ export default Ember.Service.extend({
         }
     }}),
     stop() {
-        this.empty();
         let current = this.get('hifi.currentSound');
         if (current) {
             current.stop();
+            this.set('index', 0);
             this.set('hifi.currentSound', null);
         }
     },
     play() {
         var current = this.get('hifi.currentSound'); 
-        var that = this;
         if (current) {
             return this.get('hifi').play(current);
         } else {
             return new RSVP.Promise(function(resolve, reject) {
-                var next = that.get('items').shiftObject();
-                if (next) {
-                    let url = '/file/' + next.id.toString();
-                    that.get('hifi').play(url).then(({sound}) => {
-                        that.set('currentTrack', next);
-                        sound.track = next;
+                var track = this.get('items')[this.get('index')];
+                if (track) {
+                    let url = '/file/' + track.get('id').toString();
+                    this.get('hifi').play(url).then(({sound}) => {
+                        sound.set('track', track);
                         sound.on('audio-ended', () => { 
-                            that.set('hifi.currentSound', null);
-                            that.play();
+                            this.set('hifi.currentSound', null);
+                            if (!this.get('isLast')) {
+                                this.incrementProperty('index');
+                                this.play();
+                            }
                         });
                         sound.on('audio-played', () => { 
                             resolve();
@@ -74,13 +79,41 @@ export default Ember.Service.extend({
                         reject(error);
                     });
                 }
-            });
+                else {
+                    reject();
+                }
+            }.bind(this));
         }
     },
     skip() {
         var current = this.get('hifi.currentSound'); 
         var resume = this.get('hifi.isPlaying');
+        console.log('skip');
         if (current) {
+            if (!this.get('isLast')) {
+                this.incrementProperty('index');
+                current.stop();
+                this.set('hifi.currentSound', null);
+                this.play().then(function() {
+                    if (!resume) {
+                        this.get('hifi').pause();
+                    }
+                }.bind(this));
+            }
+            else {
+                current.stop();
+                this.set('hifi.currentSound', null);
+                console.log('is last');
+            }
+        }
+    },
+    previous() {
+        var current = this.get('hifi.currentSound'); 
+        if (current) {
+            var resume = this.get('hifi.isPlaying');
+            if(this.get('index') > 0 && this.get('hifi.position') < 1000) {
+                this.decrementProperty('index');
+            }
             current.stop();
             this.set('hifi.currentSound', null);
             this.play().then(function() {
@@ -88,8 +121,6 @@ export default Ember.Service.extend({
                     this.get('hifi').pause();
                 }
             }.bind(this));
-        } else {
-            this.get('items').shiftObject();
         }
     }
 });

@@ -12,8 +12,8 @@ body {
 #song-status {
     position: absolute;
     right: 1em;
-    left: 13em;
-    text-align:right;
+    left: 14em;
+    text-align:left;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -54,6 +54,11 @@ a {
     width: 4em;
     text-align:right;
 }
+.table td.col-caret {
+    text-align:right;
+    width: 2em;
+    overflow: visible;
+}
 
 .table td {
     white-space: nowrap;
@@ -65,7 +70,7 @@ a {
     border-bottom: none !important;
 }
 .spinner {
-    height: 500px;
+    height: 200px;
     padding-top: 3em;
     text-align: center;
     color: rgba(0,0,0,0.2);
@@ -74,11 +79,15 @@ a {
     margin-top:0;
     overflow: visible;
 }
+.panel-heading .media {
+    overflow: visible;
+}
 .list-group-item:hover {
     background: #EEE;
 }
-.list-group-item .media img {
+.media img {
     width: 64px;
+    opacity: 0.5;
 }
 .list-group-item span {
     width: auto;

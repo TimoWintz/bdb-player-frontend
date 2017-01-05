@@ -1,12 +1,12 @@
 <div class="sidebar-nav panel">
     <div class="panel-heading">
         <h3>
-            Currently playing
+            Current queue ({{queue.items.length}})
         </h3>
     </div>
     <div class="list-group">
-        {{#each queue.items as |item|}}
-            <a class="list-group-item">
+        {{#each queue.items as |item index|}}
+            <a class={{if (is-equal index queue.index) "nowrap active list-group-item" "nowrap list-group-item"}}>
                 <div class="media-body">
                     <h4 class="media-heading">{{item.title}}</h4>
                     {{item.artist}}
