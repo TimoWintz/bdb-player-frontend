@@ -5,6 +5,9 @@ export default Ember.Service.extend({
     items: null,
     hifi: Ember.inject.service(),
     lastVolume: null,
+    index: null,
+    shuffle: false,
+    repeat: false,
     init() {
         this._super(...arguments);
         this.set('items', []);

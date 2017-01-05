@@ -1,21 +1,14 @@
-<table class="table">
+<table class="table-hover table">
     <tbody>
         {{#each model as |item|}}
             <tr class="nowrap">
                 <td class="track">{{item.track}} </td>
                 <td>{{item.artist}}</td>
                 <td>
-                    {{#link-to "album" item.album_id (query-params play=item.id)}}
-                        {{item.title}}
-                    {{/link-to}}
+                    {{item.title}}
                 </td>
                 <td> {{item.album}} </td>
                 <td class="duration"> {{format-duration item.length "sec"}} </td>
-                <td class="duration">
-                    <a href="" {{action "add" item}}>
-                        {{fa-icon "plus" fixedWidth=true}}
-                    </a>
-                </td>
             </tr>
         {{/each}}
     </tbody>

@@ -1,17 +1,36 @@
 <div class="panel panel-default">
-    <ul class="list-group">
-        {{#each model as |album|}} 
-            <button {{action "routeToAlbum" album.id on="click"}}type="button" class="list-group-item">
-                {{album.albumartist}} - {{album.album}}<span class="pull-right">{{album.year}}</span>
-            </button>
-        {{/each}}
-        {{#infinity-loader infinityModel=model}}
-            {{#if model.reachedInfinity}}
-            {{else}}
-                <div class="spinner">
-                    <i class="fa fa-spinner fa-spin fa-4x"></i>
+    <div class="list-group">
+        {{#each model key="id" as |album|}} 
+            <div href="#" class="list-group-item">
+                <div class="media">
+                    <div class="media-left">
+                        {{#bs-dropdown}}
+                            {{#bs-dropdown-toggle}}
+                            {{fa-icon "caret-down" size=4}}
+                            {{/bs-dropdown-toggle}}
+                            {{#bs-dropdown-menu}}
+                                <li>{{#play-queue-helper replace=true play=true type="album" objId=album.id}}Replace queue and play{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=false play=true type="album" objId=album.id}}Add to queue and play{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=true play=false type="album" objId=album.id}}Replace queue{{/play-queue-helper}}</li>
+                                <li>{{#play-queue-helper replace=false play=false type="album" objId=album.id}}Add to queue{{/play-queue-helper}}</li>
+                                <li>{{#link-to "album" album.id (query-params play=null)}}View album{{/link-to}}</li>
+                            {{/bs-dropdown-menu}}
+                        {{/bs-dropdown}}
+                    </div>
+                    <div class="media-left">
+                        {{#link-to "album" album.id}}
+                            <img src="assets/images/albumicon.svg">
+                        {{/link-to}}
+                    </div>
+                    <div class="media-body">
+                        <h4>{{album.album}}</h4>
+                        {{album.albumartist}}
+                    </div>
+                    <div class="media-right">
+                        {{album.year}}
+                    </div>
                 </div>
-            {{/if}}
-        {{/infinity-loader}}
-    </ul>
+            </div>
+        {{/each}}
+    </div>
 </div>

@@ -7,11 +7,12 @@ export default Ember.Route.extend(InfinityRoute, {
     pageParam: "page[number]",                  // instead of "page" 
     totalPagesParam: "meta.total-pages",    // instead of "meta.total_pages" 
     model() {
-            return this.infinityModel("album", {
-                perPage: 30,
-                startingPage: 1,
-                'filter[search]' : this.get('filter.filter')
-            });
+        return this.get('store').findAll('album');
+            //return this.infinityModel("album", {
+                //perPage: 30,
+                //startingPage: 1,
+                //'filter[search]' : this.get('filter.filter')
+            //});
     },
     setupController: function(controller, model) {
         this._super(controller, model);
