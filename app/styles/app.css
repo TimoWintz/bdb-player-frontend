@@ -70,7 +70,7 @@ a {
     display: block;
 }
 .table td.track, .table th.track {
-    width: 4em;
+    width: 2em;
     text-align:right;
 }
 .table td.duration, .table th.duration {

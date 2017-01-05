@@ -29,7 +29,7 @@
     <table class="table relaxed table-hover">
         <tbody>
             {{#each tracks as |track|}} 
-                <tr class={{if (is-equal track hifi.currentSound.track) "nowrap active" "nowrap"}}>
+                <tr class="nowrap">
                     <td class="col-caret">
                         {{#bs-dropdown}}
                             {{#bs-dropdown-toggle}}
@@ -44,9 +44,6 @@
                         {{/bs-dropdown}}
                     </td>
                     <td class="track">
-                        {{#if (is-equal track hifi.currentSound.track)}}
-                            {{fa-icon "volume-up"}}
-                        {{/if}}
                         {{track.track}}
                     </td>
                     <td>{{track.title}}</td>
