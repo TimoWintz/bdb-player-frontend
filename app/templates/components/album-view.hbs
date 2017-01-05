@@ -7,11 +7,11 @@
                         {{fa-icon "caret-down" size=4}}
                     {{/bs-dropdown-toggle}}
                     {{#bs-dropdown-menu}}
-                        <li>{{#play-queue-helper replace=true play=true type="album" objectId=model.album.id}}Replace queue and play{{/play-queue-helper}}</li>
-                        <li>{{#play-queue-helper replace=false play=true type="album" objectId=model.album.id}}Add to queue and play{{/play-queue-helper}}</li>
-                        <li>{{#play-queue-helper replace=true play=false type="album" objectId=model.album.id}}Replace queue{{/play-queue-helper}}</li>
-                        <li>{{#play-queue-helper replace=false play=false type="album" objectId=model.album.id}}Add to queue{{/play-queue-helper}}</li>
-                        <li>{{#link-to "album" model.album.id (query-params play=null)}}View album{{/link-to}}</li>
+                        <li>{{#play-queue-helper replace=true play=true type="album" objectId=album.id}}Replace queue and play{{/play-queue-helper}}</li>
+                        <li>{{#play-queue-helper replace=false play=true type="album" objectId=album.id}}Add to queue and play{{/play-queue-helper}}</li>
+                        <li>{{#play-queue-helper replace=true play=false type="album" objectId=album.id}}Replace queue{{/play-queue-helper}}</li>
+                        <li>{{#play-queue-helper replace=false play=false type="album" objectId=album.id}}Add to queue{{/play-queue-helper}}</li>
+                        <li>{{#link-to "album" album.id (query-params play=null)}}View album{{/link-to}}</li>
                     {{/bs-dropdown-menu}}
                 {{/bs-dropdown}}
             </div>
@@ -21,17 +21,17 @@
                 {{/link-to}}
             </div>
             <div class="media-body">
-                <h4>{{model.album.album}}</h4>
-                {{model.album.albumartist}}
+                <h4>{{album.album}}</h4>
+                {{album.albumartist}}
             </div>
             <div class="media-right">
-                {{model.album.year}}
+                {{album.year}}
             </div>
         </div>
     </div>
     <table class="table relaxed table-hover">
         <tbody>
-            {{#each model.tracks as |track|}} 
+            {{#each tracks as |track|}} 
                 <tr class={{if (is-equal track hifi.currentSound.track) "nowrap active" "nowrap"}}>
                     <td class="col-caret">
                         {{#bs-dropdown}}
