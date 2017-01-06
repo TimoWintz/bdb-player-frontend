@@ -71,6 +71,7 @@ a {
 }
 .table td.track, .table th.track {
     width: 2em;
+    overflow: visible;
     text-align:right;
 }
 .table td.duration, .table th.duration {
