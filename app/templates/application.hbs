@@ -1,5 +1,5 @@
 <!-- Fixed navbar -->
-<nav class="navbar navbar-fixed-top navbar-default">
+<nav id="top-bar" class="navbar navbar-fixed-top navbar-default">
     <div class="container-fluid">
         {{#bs-nav type="tabs"}}
             {{#bs-nav-item class="navbar-btn"}}
@@ -16,17 +16,10 @@
 </nav>
 <div id="wrapper">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        {{currently-playing}}
-    </div>
+    {{currently-playing}}
     <div id="page-content-wrapper">
         <div class="container-fluid">
             {{outlet}}
         </div> <!-- /container -->
     </div>
 </div>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        {{music-player}}
-    </div>
-</nav>

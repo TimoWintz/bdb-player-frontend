@@ -7,9 +7,10 @@ export default Ember.Component.extend({
         return 100*this.get('position')/this.get('duration');
     }),
     click(evt) {
-        var posX = this.$().offset().left
+        var posX = this.$().offset().left;
         var width = this.$().width(); 
         var relPos = (evt.pageX - posX)/width;
-        this.set('position', relPos*this.get('duration'));
+        var absPos = Math.round(relPos*this.get('duration'));
+        this.set('position', absPos);
     }
 });

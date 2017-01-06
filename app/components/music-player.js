@@ -24,20 +24,30 @@ export default Ember.Component.extend({
         }
     }),
     actions : {
-        toggleMute() {
-            this.get('queue').toggleProperty('muted');
-        },
-        play() {
-            this.get('queue').play();
-        },
-        pause() {
-            this.get('hifi').pause();
-        },
-        skip() {
-            this.get('queue').skip();
-        },
-        previous() {
-            this.get('queue').previous();
-        }
-    }
+		toggle(prop) {
+			this.get('queue').toggleProperty(prop);
+		},
+		play() {
+			this.get('queue').play();
+		},
+		pause() {
+			this.get('hifi').pause();
+		},
+		skip() {
+			var resume = this.get('hifi.isPlaying');
+			this.get('queue').playNext().then(() => {
+				if (!resume) {
+					this.get('hifi').pause();
+				}
+			});
+		},
+		previous() {
+			var resume = this.get('hifi.isPlaying');
+			this.get('queue').playPrevious().then(() => {
+				if (!resume) {
+					this.get('hifi').pause();
+				}
+			});
+		}
+	}
 });

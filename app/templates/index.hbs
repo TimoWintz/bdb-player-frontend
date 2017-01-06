@@ -4,19 +4,6 @@
             <div href="#" class="list-group-item">
                 <div class="media">
                     <div class="media-left">
-                        {{#bs-dropdown}}
-                            {{#bs-dropdown-toggle}}
-                            {{fa-icon "caret-down" size=4}}
-                            {{/bs-dropdown-toggle}}
-                            {{#bs-dropdown-menu}}
-                                <li>{{#play-queue-helper replace=true play=true type="album" objectId=album.id}}Replace queue and play{{/play-queue-helper}}</li>
-                                <li>{{#play-queue-helper replace=false play=true type="album" objectId=album.id}}Add to queue and play{{/play-queue-helper}}</li>
-                                <li>{{#play-queue-helper replace=true play=false type="album" objectId=album.id}}Replace queue{{/play-queue-helper}}</li>
-                                <li>{{#play-queue-helper replace=false play=false type="album" objectId=album.id}}Add to queue{{/play-queue-helper}}</li>
-                            {{/bs-dropdown-menu}}
-                        {{/bs-dropdown}}
-                    </div>
-                    <div class="media-left">
                         {{#play-queue-helper replace=true play=true type="album" objectId=album.id}}<img src="/assets/images/albumicon.svg">{{/play-queue-helper}}
                     </div>
                     <div class="media-body" {{action "toggleAlbum" album.id}}>
@@ -30,9 +17,9 @@
             </div>
         {{/each}}
     </div>
-</div>
 {{#bs-modal open=showAlbum footer=false}}
     {{#if selectedAlbum}}
         {{album-view albumId=selectedAlbum}}
     {{/if}}
 {{/bs-modal}}
+</div>

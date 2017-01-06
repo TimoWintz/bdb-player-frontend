@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     replace : false,
     play: false,
+	search: false,
     type: null,
     objectId: null,
     playQueue : Ember.inject.service('play-queue'),
@@ -11,6 +12,7 @@ export default Ember.Component.extend({
     click() {
         if (this.get('replace')) {
             this.get('playQueue').empty();
+            this.get('playQueue').stop();
         }
         var numberOfTracks = this.get('playQueue').get('items').length;
         var first = true;
@@ -20,19 +22,35 @@ export default Ember.Component.extend({
                 album.map(function(item) {
                     this.get('playQueue').add(item);
                     if (first && this.get('play')) {
-                        this.get('playQueue').set('index', numberOfTracks);
+                        this.get('playQueue').set('playingIndex', numberOfTracks);
                         this.get('playQueue').play();
                     }
                     first = false;
                 }.bind(this));
             }.bind(this));
         } else if (this.get('type') === "track") {
+            var foundTrack = false;
             var track = this.get('store').find('item', this.get('objectId'));
-            track.then(function() {
-                this.get('playQueue').add(track);
-                if (this.get('play')) {
-                    this.get('playQueue').set('index', numberOfTracks);
-                    this.get('playQueue').play();
+            track.then(function(value) {
+                if (this.get('search')) {
+                    var items = this.get('playQueue.items');
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].track.get('id') === value.get('id')) {
+                            this.set('playQueue.playingIndex', items[i].index);
+                            this.get('playQueue').stop();
+                            this.get('playQueue').play();
+                            foundTrack = true;
+                            break;
+                        }
+                    }
+                }
+                if (!foundTrack) {
+                    this.get('playQueue').add(value);
+                    if (this.get('play')) {
+                        this.get('playQueue').set('playingIndex', numberOfTracks);
+                        this.get('playQueue').stop();
+                        this.get('playQueue').play();
+                    }
                 }
             }.bind(this));
         }

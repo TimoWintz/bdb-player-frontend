@@ -2,23 +2,35 @@ import Ember from 'ember';
 import RSVP from 'rsvp';
 
 export default Ember.Service.extend({
-    items: null,
     hifi: Ember.inject.service(),
+    store: Ember.inject.service(),
     lastVolume: null,
-    index: 0,
-    isLast : Ember.computed('index', 'items.length', function() {
-        return this.get('index') === (this.get('items.length') - 1);
-    }),
+
+    items: null,
+    previousIndices: null,
+    playingIndex: null,
+    maxIndex: null,
+
     shuffle: false,
     repeat: false,
+    continue: false,
+
+    isLast : Ember.computed('playingIndex', 'items.length', function() {
+        return this.get('playingIndex') === (this.get('items.length') - 1);
+    }),
+
+
     init() {
         this._super(...arguments);
         this.set('items', []);
+        this.set('previousIndices', []);
+        this.set('maxIndex', 0);
         this.set('lastVolume', this.get('hifi.volume'));
     },
 
     add(item) {
-        this.get('items').pushObject(item);
+        this.get('items').pushObject({track: item, index: this.get('maxIndex')});
+        this.incrementProperty('maxIndex');
     },
 
     remove(item) {
@@ -27,7 +39,9 @@ export default Ember.Service.extend({
 
     empty() {
         this.get('items').setObjects([]);
-        this.set('index', 0);
+        this.get('previousIndices').setObjects([]);
+        this.set('maxIndex', 0);
+        this.set('playingIndex', null);
     },
 
     muted: Ember.computed('hifi.volume', 'lastVolume', { get() {
@@ -46,42 +60,35 @@ export default Ember.Service.extend({
             return true;
         }
     }}),
+
     stop() {
         var current = this.get('hifi.currentSound'); 
         if (current) {
             this.get('hifi').stop();
         }
     },
+
     play() {
-        var currentIndex = this.get('index');
-        var track = this.get('items')[currentIndex];
+        var playingIndex = this.get('playingIndex');
+        var item = this.get('items')[playingIndex];
         var current = this.get('hifi.currentSound');
-        this.stop();
-        if (current && track.id === current.track.id) {
+        if (current && item.track.id === current.track.id) {
             return this.get('hifi').play(current);
         }
         else {
+            this.get('previousIndices').pushObject(playingIndex);
+            this.stop();
             return new RSVP.Promise(function(resolve, reject) {
-                if (track) {
-                    let url = '/file/' + track.get('id').toString();
+                if (item) {
+                    let url = '/file/' + item.track.get('id').toString();
                     this.get('hifi').play(url).then(({sound}) => {
-                        sound.set('track', track);
-                        sound.on('audio-ended', (resume=true) => { 
-                            if (!this.get('isLast')) {
-                                this.set('index', currentIndex + 1);
-                                this.play().then(() => {
-                                    if (!resume) {
-                                        this.get('hifi').pause();
-                                    }
-                                });
+                        sound.set('track', item.track);
+                        sound.on('audio-ended', () => { 
+                            if(this.get('playingIndex') === playingIndex) {
+                                this.playNext();
                             }
-                        });
+                            });
                         sound.on('audio-played', () => { 
-                            if (!this.get('isLast')) {
-                                var next = this.get('items')[currentIndex+1];
-                                let url = '/file/' + next.get('id').toString();
-                                this.get('hifi').load(url);
-                            }
                             resolve();
                         });
                     }.bind(this)).catch(error => {
@@ -89,32 +96,72 @@ export default Ember.Service.extend({
                     });
                 }
                 else {
-                    reject();
+                    reject("Could not get track at index");
                 }
             }.bind(this));
         }
     },
-    skip() {
-        var current = this.get('hifi.currentSound'); 
-        var resume = this.get('hifi.isPlaying');
-        if (current) {
-            this.get('hifi').stop();
-            current.trigger('audio-ended', resume);
-        }
-    },
-    previous() {
-        var current = this.get('hifi.currentSound'); 
-        if (current) {
-            var resume = this.get('hifi.isPlaying');
-            if(this.get('index') > 0 && this.get('hifi.position') < 1000) {
-                this.decrementProperty('index');
+
+    playNext() {
+        var index = this.get('playingIndex');
+        var next=null;
+        if (this.get('shuffle')) {
+            next = Math.floor((Math.random() * this.get('items.length')));
+        } else {
+            if (!this.get('isLast')) {
+                next = index + 1;
             }
-            current.stop();
-            this.play().then(function() {
-                if (!resume) {
-                    this.get('hifi').pause();
-                }
-            }.bind(this));
+            else if (this.get('repeat')) {
+                next = 0;
+            }
+            else if (this.get('continue')) { //Search for next track in album if "continue" is on
+                var lastItem = this.get('items')[this.get('items.length') - 1].track;
+                var albumId = lastItem.get('album_id'),
+                    track = lastItem.get('track'),
+                    disc = lastItem.get('disc'),
+                    that = this;
+                var nextItem = this.get('store').query('item', {filter : { album_id : albumId}});
+                nextItem.then(function(value) {
+                    console.log(value.get('length'));
+                    for (var i = 0; i < value.get('length'); i++) {
+                        var item = value.objectAt(i);
+                        console.log(item.get('disc'));
+                        console.log(item.get('track'));
+                        if (item.get('disc') === disc && item.get('track') === track+1) {
+                            that.add(item);
+                            that.incrementProperty('playingIndex');
+                            console.log(item);
+                            return that.play();
+                        } 
+                        if (item.disc === disc+1 && item.track === 1) {
+                            that.add(item);
+                            that.incrementProperty('playingIndex');
+                            return that.play();
+                        } 
+                    }
+                    that.stop();
+                    return RSVP.resolve();
+                }, function() {
+                    that.stop();
+                    return RSVP.resolve();
+                });
+            }
         }
+        if (next !== null) {
+            this.set('playingIndex', next);
+            return this.play();
+        }
+        this.stop();
+        return RSVP.resolve();
+    },
+
+    playPrevious() {
+        var index = this.get('playingIndex');
+        if (index > 0) {
+            this.decrementProperty('playingIndex');
+            return this.play();
+        }
+        return RSVP.resolve();
     }
+
 });

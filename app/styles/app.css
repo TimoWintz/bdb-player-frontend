@@ -1,7 +1,9 @@
 html {
+    overflow: hidden;
     overflow-y: scroll;
 }
 body {
+    overflow-x: hidden;
     padding-top: 50px;
     padding-bottom: 50px;
 }
@@ -9,65 +11,37 @@ body {
     position: absolute;
     right: 14px;
 }
-#song-status {
-    position: absolute;
-    right: 1em;
-    left: 14em;
-    top: 0;
-    bottom: 0;
-    text-align:left;
-    white-space: nowrap;
-    overflow: hidden;
+.song-info {
+    height: 70px;
+    width: 100%;
 }
-#song-status span {
-    position: absolute;
-    padding-left: 1em;
-    left:0;
-    right:0;
+.btn-group-panel .btn {
+	border: 0;
+	border-radius: 0;
 }
-#track-progress {
-    display: none;
+.btn-table {
+	display: block;
+	border-top: 0;
+	border-bottom: 0;
+	border-left: 0;
+	border-radius: 0;
+	height: 100%;
 }
-@media(min-width:768px) {
-    #track-progress {
-        display: block;
-        position: absolute;
-        left: 0;
-        width: 10em;
-        top: 0;
-    }
-    #song-status span {
-        left:10em;
-    }
-}
+
 a {
     cursor: pointer;
-}
-/*no collapse*/
 
-.navbar-collapse.collapse.off {
-    display: block!important;
 }
-.navbar-collapse.collapse.off ul {
-    margin: 0;
-    padding: 0;
+.spacer1 {
+    height: 1em;
 }
 
-.navbar-nav.no-collapse>li,
-.navbar-nav.no-collapse {
-    float: left !important;
-    margin: 0;
-}
-
-.navbar-right.no-collapse {
-    float: right!important;
-}
 .table {
     width: 100%;
     table-layout:fixed;
 }
 .table a {
-    display: block;
+	display: block;
 }
 .table td.track, .table th.track {
     width: 2em;
@@ -79,9 +53,12 @@ a {
     text-align:right;
 }
 .table td.col-caret {
-    text-align:right;
-    width: 2em;
+    width: 1em;
     overflow: visible;
+}
+.nowrap {
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .table td {
@@ -118,116 +95,123 @@ a {
     display:inline-table;
     margin-left: 0.5em;
 }
-/*!
- * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
 
-    body {
-        overflow-x: hidden;
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+}
+
+#wrapper.toggled {
+    padding-left: 350px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    background: #FFF;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    height: 170px;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -350px;
+}
+
+/* Sidebar Styles */
+.sidebar-heading {
+    position: absolute;
+    top: 0;
+    height: 170px;
+    width: 100%;
+    left: 0;
+    padding:5px;
+}
+.sidebar-body {
+    display: none;
+    position: absolute;
+    top: 170px;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    overflow: hidden;
+}
+.sidebar-body:hover {
+    overflow-y: scroll;
+}
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    min-height: 100%;
+    width: 350px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li h3 {
+    display: block;
+    margin: 0.2em;
+}
+.sidebar-nav .media {
+    margin:0;
+    margin-top: 3px;
+    padding-right: 1em;
+}
+
+.sidebar-nav li a {
+    display: block;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+
+
+@media(min-width:768px) {
+    .sidebar-body {
+        display: block;
     }
-
-    /* Toggle Styles */
-
     #wrapper {
-        padding-left: 0;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-    }
-
-    #wrapper.toggled {
         padding-left: 350px;
     }
 
     #sidebar-wrapper {
-        z-index: 1000;
-        position: fixed;
-        right: 350px;
-        width: 0;
-        top: 50px;
-        bottom: 50px;
-        margin-right: -350px;
-        overflow: hidden;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-    }
-    #sidebar-wrapper:hover { overflow-y:scroll; }
-
-    #wrapper.toggled #sidebar-wrapper {
         width: 350px;
+        z-index: 1000;
+        left: 350px;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        margin-left: -350px;
+        overflow: hidden;
     }
 
     #page-content-wrapper {
-        width: 100%;
-        position: absolute;
-        padding: 15px;
+        padding: 20px;
+        position: relative;
     }
 
     #wrapper.toggled #page-content-wrapper {
-        position: absolute;
-        margin-left: -350px;
+        position: relative;
+        margin-right: 0;
     }
-
-    /* Sidebar Styles */
-
-    .sidebar-nav {
-        position: absolute;
-        top: 0;
-        min-height: 100%;
-        width: 350px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        border-left: 1px solid rgba(0,0,0,0.15);
+    #top-bar {
+        left: 350px;
     }
-
-    .sidebar-nav li h3 {
-        display: block;
-        margin: 0.2em;
+    #bottom-bar {
+        display: none;
     }
-    .sidebar-nav .media {
-        margin:0;
-        margin-top: 3px;
-        padding-right: 1em;
+    #sidebar-wrapper .media-body {
+        max-width: 260px;
     }
-
-    .sidebar-nav li a {
-        display: block;
-        padding-left: 14px;
-        padding-right: 14px;
-    }
-
-
-
-    @media(min-width:768px) {
-        #wrapper {
-            padding-right: 350px;
-        }
-
-        #wrapper.toggled {
-            padding-right: 0;
-        }
-
-        #sidebar-wrapper {
-            width: 350px;
-        }
-
-        #wrapper.toggled #sidebar-wrapper {
-            width: 0;
-        }
-
-        #page-content-wrapper {
-            padding: 20px;
-            position: relative;
-        }
-
-        #wrapper.toggled #page-content-wrapper {
-            position: relative;
-            margin-right: 0;
-        }
-    }
+}

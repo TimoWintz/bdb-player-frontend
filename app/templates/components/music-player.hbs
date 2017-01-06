@@ -1,35 +1,38 @@
-<span class="btn-group navbar-btn navbar-left">
-    <button {{action "previous"}} type="button" class="btn btn-primary">
-        {{fa-icon "step-backward" fixedWidth=true}}
-    </button>
-    {{#if hifi.isPlaying}}
-        <button {{action "pause"}} type="button" class="btn btn-primary">
-            {{fa-icon "pause" fixedWidth=true}}
-        </button>
-    {{else}}
-        <button {{action "play"}} type="button" class="btn btn-primary">
-            {{fa-icon "play" fixedWidth=true}}
-        </button>
-    {{/if}}
-    <button {{action "skip"}} type="button" class="btn btn-primary">
-        {{fa-icon "step-forward" fixedWidth=true}}
-    </button>
-</span>
-<span class="navbar-left navbar-btn">
-    <button class="btn btn-primary" type="button" {{action "toggleMute"}}>
-        {{#if queue.muted}}
-            {{fa-icon "volume-off" fixedWidth=true}}
-        {{else}}
-            {{fa-icon "volume-up" fixedWidth=true}}
-        {{/if}}
-    </button>
-</span>
-<span id="song-status" class="navbar-text">
+<div class="song-info">
     {{#if hifi.currentSound}} 
-        <span>
-        {{format-duration hifi.position}} / {{format-duration hifi.duration}} | 
-        <b>{{hifi.currentSound.track.artist}}</b> - {{hifi.currentSound.track.title}}  
-        </span>
-        {{track-progress id="track-progress" position=hifi.position duration=hifi.duration}}
+        <div class="media nowrap">
+            <div class="media-body">
+                <h4 class="media-heading">{{hifi.currentSound.track.title}}</h4>
+                {{hifi.currentSound.track.artist}}
+            </div>
+            <div class="media-right">
+                {{format-duration hifi.position}} / {{format-duration hifi.duration}}
+            </div>
+        </div>
+    {{else}}
+        <div class="media nowrap">
+            <div class="media-body">
+                <h4 class="media-heading">No track is playing </h4>
+                -
+        </div>
+        </div>
     {{/if}}
-</span>
+    {{track-progress class="track-progress" position=hifi.position duration=hifi.duration}}
+</div>
+<div class="btn-group btn-group-justified">
+    <a {{action "previous"}} type="button" class="btn btn-primary">
+        {{fa-icon "step-backward" fixedWidth=true}}
+    </a>
+    {{#if hifi.isPlaying}}
+        <a {{action "pause"}} type="button" class="btn btn-primary">
+            {{fa-icon "pause" fixedWidth=true}}
+        </a>
+    {{else}}
+        <a {{action "play"}} type="button" class="btn btn-primary">
+            {{fa-icon "play" fixedWidth=true}}
+        </a>
+    {{/if}}
+    <a {{action "skip"}} type="button" class="btn btn-primary">
+        {{fa-icon "step-forward" fixedWidth=true}}
+    </a>
+</div>
