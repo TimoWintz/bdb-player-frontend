@@ -15,13 +15,7 @@
             <div class="list-group">
                 {{#each queue.items as |item|}}
                     <a {{action "switchTrack" item.index}} id={{format-item-id item.index}} class={{if (is-equal item.index queue.playingIndex) "nowrap active list-group-item" "nowrap list-group-item"}}>
-                        <div class="media-body">
-                            <h4 class="media-heading">{{item.track.title}}</h4>
-                            {{item.track.artist}}
-                        </div>
-                        <div class="media-right">
-                            {{format-duration item.track.length "sec"}}
-                        </div>
+                        {{#if (is-equal item.index queue.playingIndex)}}{{fa-icon "volume-up"}} {{/if}}{{item.track.artist}} - {{item.track.title}}
                     </a>
                 {{/each}}
             </div>
