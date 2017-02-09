@@ -1,0 +1,11 @@
+{{#context-menu-zone tagName="tr" type="track" objectId=track.id}}
+    <td class="track">
+        {{track.track}}
+    </td>
+    <td>
+        {{#play-queue-helper search=true replace=false play=true type="track" objectId=track.id}}{{track.title}}{{/play-queue-helper}}
+    </td>
+    <td class="duration">
+        {{format-duration track.length "sec"}}
+    </td>
+{{/context-menu-zone}}

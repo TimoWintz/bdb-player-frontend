@@ -1,6 +1,7 @@
 <div class="panel panel-default">
     <div class="list-group">
         {{#each model key="id" as |album|}} 
+            {{#context-menu-zone type="album" objectId=album.id}}
             <div href="#" class="list-group-item">
                 <div class="media">
                     <div class="media-left">
@@ -15,6 +16,7 @@
                     </div>
                 </div>
             </div>
+            {{/context-menu-zone}}
         {{/each}}
     </div>
 {{#bs-modal open=showAlbum footer=false}}

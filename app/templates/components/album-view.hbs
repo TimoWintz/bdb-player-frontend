@@ -13,34 +13,32 @@
 			</div>
 		</div>
 	</div>
-	<div class="btn-group-panel btn-group btn-group-justified">
-		{{#play-queue-helper class="btn btn-default" replace=false play=false type="album" objectId=album.id}}{{fa-icon "plus"}} Add to queue{{/play-queue-helper}}
-		{{#play-queue-helper class="btn btn-default" replace=false play=true type="album" objectId=album.id}}{{fa-icon "plus"}} {{fa-icon "play"}} Add and play{{/play-queue-helper}}
-		{{#play-queue-helper class="btn btn-default" replace=true play=true type="album" objectId=album.id}}{{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play{{/play-queue-helper}}
-	</div>
-	<table class="table relaxed table-hover">
-		<tbody>
-			{{#each tracks as |track|}} 
-				<tr class="nowrap">
-					<td class="col-caret">
-						{{#bs-dropdown}}
-							{{#bs-dropdown-toggle}}
-								{{fa-icon "caret-down"}}
-							{{/bs-dropdown-toggle}}
-							{{#bs-dropdown-menu}}
-								<li>{{#play-queue-helper replace=false play=false type="track" objectId=track.id}}{{fa-icon "plus"}} Add to queue{{/play-queue-helper}}</li>
-								<li>{{#play-queue-helper replace=false play=true type="track" objectId=track.id}}{{fa-icon "plus"}} {{fa-icon "play"}} Add and play{{/play-queue-helper}}</li>
-								<li>{{#play-queue-helper replace=true play=true type="track" objectId=track.id}}{{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play{{/play-queue-helper}}</li>
-							{{/bs-dropdown-menu}}
-						{{/bs-dropdown}}
-					</td>
-					<td class="track">
-						{{track.track}}
-					</td>
-					<td>{{#play-queue-helper search=true replace=false play=true type="track" objectId=track.id}}{{track.title}}{{/play-queue-helper}}</td>
-					<td class="duration">{{format-duration track.length "sec"}}</td>
-				</tr>
-			{{/each}}
-		</tbody>
-	</table>
+    <div class="btn-group-panel btn-group btn-group-justified">
+        {{#play-queue-helper class="btn btn-default" replace=false play=false type="album" objectId=album.id}}
+            {{fa-icon "plus"}} Add to queue
+        {{/play-queue-helper}}
+        {{#play-queue-helper class="btn btn-default" replace=false play=true type="album" objectId=album.id}}
+            {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
+        {{/play-queue-helper}}
+        {{#play-queue-helper class="btn btn-default" replace=true play=true type="album" objectId=album.id}}
+            {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
+    {{/play-queue-helper}}
+    </div>
+    <table class="table relaxed table-hover">
+        <tbody>
+            {{#each tracks as |track|}} 
+                {{#context-menu-zone tagName="tr" type="track" objectId=track.id}}
+                    <td class="track">
+                        {{track.track}}
+                    </td>
+                    <td>
+                        {{#play-queue-helper search=true replace=false play=true type="track" objectId=track.id}}{{track.title}}{{/play-queue-helper}}
+                    </td>
+                    <td class="duration">
+                        {{format-duration track.length "sec"}}
+                    </td>
+                {{/context-menu-zone}}
+            {{/each}}
+        </tbody>
+    </table>
 </div>

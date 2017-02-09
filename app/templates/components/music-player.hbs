@@ -21,18 +21,18 @@
 </div>
 <div class="btn-group btn-group-justified">
     <a {{action "previous"}} type="button" class="btn btn-primary">
-        {{fa-icon "step-backward" fixedWidth=true}}
+        {{fa-icon "step-backward"}}
     </a>
     {{#if hifi.isPlaying}}
         <a {{action "pause"}} type="button" class="btn btn-primary">
-            {{fa-icon "pause" fixedWidth=true}}
+        {{fa-icon "pause"}}
         </a>
     {{else}}
         <a {{action "play"}} type="button" class="btn btn-primary">
-            {{fa-icon "play" fixedWidth=true}}
+        {{fa-icon "play"}}
         </a>
     {{/if}}
     <a {{action "skip"}} type="button" class="btn btn-primary">
-        {{fa-icon "step-forward" fixedWidth=true}}
+        {{fa-icon "step-forward"}}
     </a>
 </div>

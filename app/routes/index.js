@@ -19,10 +19,5 @@ export default Ember.Route.extend(InfinityRoute, {
         this.addObserver('filter.filter', function() {
             this.refresh();
         });
-    },
-    actions: {
-        routeToAlbum(album_id) {
-            this.transitionTo("album", album_id, { queryParams: { play: null }});
-        }
     }
 });
