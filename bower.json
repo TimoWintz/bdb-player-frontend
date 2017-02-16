@@ -12,6 +12,7 @@
     "jquery-mousewheel": "~3.1.4",
     "jquery-ui": "~1.11.4",
     "bootstrap": "~3.3.5",
-    "nouislider": "^8.0.1"
+    "nouislider": "^8.0.1",
+    "jplayer" : "https://github.com/happyworm/jPlayer.git"
   }
 }
