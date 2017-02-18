@@ -1,15 +1,15 @@
 <table class="table-hover table">
     <tbody>
         {{#each model as |item|}}
-            <tr class="nowrap">
+            {{#context-menu-zone tagName="tr" class="nowrap" type="track" objectId=item.id}}
                 <td class="track">{{item.track}} </td>
                 <td>{{item.artist}}</td>
                 <td>
                     {{item.title}}
                 </td>
-                <td> {{item.album}} </td>
-                <td class="duration"> {{format-duration item.length "sec"}} </td>
-            </tr>
+                <td> <a {{action "toggleAlbum" item.album_id}}>{{item.album}} </a></td>
+                <td class="duration">{{format-duration item.length "sec"}} </td>
+            {{/context-menu-zone}}
         {{/each}}
     </tbody>
 </table>
@@ -21,3 +21,8 @@
         </div>
     {{/if}}
 {{/infinity-loader}}
+{{#bs-modal open=showAlbum footer=false}}
+    {{#if selectedAlbum}}
+        {{album-view albumId=selectedAlbum}}
+    {{/if}}
+{{/bs-modal}}

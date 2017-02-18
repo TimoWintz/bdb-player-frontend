@@ -4,7 +4,7 @@ module.exports = function(environment) {
     var ENV = {
         modulePrefix: 'music-player',
         environment: environment,
-        rootURL: '/',
+        rootURL: '/static/',
         locationType: 'auto',
         EmberENV: {
             FEATURES: {
