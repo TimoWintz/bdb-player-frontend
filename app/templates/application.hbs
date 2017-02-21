@@ -2,14 +2,14 @@
 <nav id="top-bar" class="navbar navbar-fixed-top navbar-default">
     <div class="container-fluid">
         {{#bs-nav type="tabs"}}
-            {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "index"}}Albums{{/link-to}}
+            {{#bs-nav-item class=(navbar-class "index")}}
+                {{#link-to "index"}}<span {{action "clearFilter"}}>Albums</span>{{/link-to}}
             {{/bs-nav-item}}
-            {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "tracks"}}Tracks{{/link-to}}
+            {{#bs-nav-item class=(navbar-class "tracks")}}
+                {{#link-to "tracks"}}<span {{action "clearFilter"}}>Tracks</span>{{/link-to}}
             {{/bs-nav-item}}
-            {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "folders"}}Folders{{/link-to}}
+            {{#bs-nav-item class=(navbar-class "folders")}}
+                {{#link-to "folders"}}<span {{action "clearFilter"}}>Folders</span>{{/link-to}}
             {{/bs-nav-item}}
         {{/bs-nav}}
     </div>

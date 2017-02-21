@@ -1,9 +1,15 @@
+<div class="fill-group-list-item" {{action "toggleOpen"}}>
 {{#if item.folder}}
+    {{#if isOpen}}
+    {{fa-icon "folder-open" size=1}}
+    {{else}}
     {{fa-icon "folder" size=1}}
+{{/if}}
 {{else}}
     {{fa-icon "music" size=1}}
 {{/if}}
 <span>{{item.name}}</span>
+</div>
 {{#if isOpen}}
     {{folder-view prefix=prefix}}
 {{/if}}

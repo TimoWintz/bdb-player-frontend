@@ -233,3 +233,7 @@ a {
 .input-group {
     margin-bottom: 10px;
 }
+.fill-group-list-item {
+    margin: -10px;
+    padding: 10px;
+}

@@ -1,5 +1,12 @@
 <ul class="list-group folder-view">
+    {{#if loading}}
+       <div class="list-group-item">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </div>
+    {{/if}}
     {{#each items as |item|}}
-        {{single-folder item=item class="list-group-item" prefix=(concat-path prefix item.name)}}
+        {{#context-menu-zone type="path" class="list-group-item" objectId=(concat-path prefix item.name)}}
+            {{single-folder item=item prefix=(concat-path prefix item.name)}}
+        {{/context-menu-zone}}
     {{/each}}
 </ul>
