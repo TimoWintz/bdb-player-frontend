@@ -1,1 +1,5 @@
-{{yield}}
+<ul class="list-group folder-view">
+    {{#each items as |item|}}
+        {{single-folder item=item class="list-group-item" prefix=(concat-path prefix item.name)}}
+    {{/each}}
+</ul>

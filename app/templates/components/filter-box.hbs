@@ -1,1 +1,8 @@
-{{input type="text" class="form-control" placeholder="Filter" value=filterText}}
+<div class="input-group">
+    {{input type="text" class="form-control" placeholder="Filter" value=filter.filter}}
+    <div class="input-group-btn">
+        <button {{action "clearFilter"}} class="btn btn-default" type="submit">
+          {{fa-icon "recycle"}}
+      </button>
+    </div>
+</div>

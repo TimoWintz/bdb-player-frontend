@@ -1,0 +1,9 @@
+{{#if item.folder}}
+    {{fa-icon "folder" size=1}}
+{{else}}
+    {{fa-icon "music" size=1}}
+{{/if}}
+<span>{{item.name}}</span>
+{{#if isOpen}}
+    {{folder-view prefix=prefix}}
+{{/if}}

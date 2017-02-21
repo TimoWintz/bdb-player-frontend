@@ -8,8 +8,8 @@
             {{#bs-nav-item class="navbar-btn"}}
                 {{#link-to "tracks"}}Tracks{{/link-to}}
             {{/bs-nav-item}}
-            {{#bs-nav-item id="filter-box" class="navbar-btn"}}
-                {{filter-box}}
+            {{#bs-nav-item class="navbar-btn"}}
+                {{#link-to "folders"}}Folders{{/link-to}}
             {{/bs-nav-item}}
         {{/bs-nav}}
     </div>
@@ -19,6 +19,7 @@
     {{currently-playing}}
     <div id="page-content-wrapper">
         <div class="container-fluid">
+            {{filter-box}}
             {{outlet}}
         </div> <!-- /container -->
     </div>
