@@ -4,7 +4,7 @@ export default Ember.Route.extend({
     queue: Ember.inject.service('play-queue'),
     filter: Ember.inject.service(),
     actions : {
-        clearFilter(link) {
+        clearFilter() {
             this.set("filter.filter", "");
         }
     },
