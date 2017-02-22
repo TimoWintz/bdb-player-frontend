@@ -33,4 +33,5 @@ You will need the following things properly installed on your computer.
 * UI: links on tracks are ugly
 * Playlist support
 * User support/playlists support per user
+* Client-side download and zip ?
 
