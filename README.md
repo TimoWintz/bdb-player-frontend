@@ -29,6 +29,8 @@ You will need the following things properly installed on your computer.
 * The easiest way to deploy the app is to use the [docker](https://git.timwin.fr/tim/beets-player-docker) image
 
 ## To do
+* Remove item from playlist
+* UI: links on tracks are ugly
 * Playlist support
 * User support/playlists support per user
-* UI: links on tracks are ugly
+
