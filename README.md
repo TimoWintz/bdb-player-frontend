@@ -34,4 +34,4 @@ You will need the following things properly installed on your computer.
 * Playlist support
 * User support/playlists support per user
 * Client-side download and zip ?
-
+* Hover text on buttons
