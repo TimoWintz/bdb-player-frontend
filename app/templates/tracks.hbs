@@ -5,7 +5,7 @@
                 <td class="track">{{item.track}} </td>
                 <td>{{item.artist}}</td>
                 <td>
-                    {{item.title}}
+                        {{#play-queue-helper search=true replace=false play=true type="track" objectId=item.id}}{{item.title}}{{/play-queue-helper}}
                 </td>
                 <td> <a {{action "toggleAlbum" item.album_id}}>{{item.album}} </a></td>
                 <td class="duration">{{format-duration item.length "sec"}} </td>

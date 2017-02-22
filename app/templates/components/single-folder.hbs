@@ -1,14 +1,15 @@
 <div class="fill-group-list-item" {{action "toggleOpen"}}>
-{{#if item.folder}}
-    {{#if isOpen}}
-    {{fa-icon "folder-open" size=1}}
+    {{#if item.folder}}
+        {{#if isOpen}}
+            {{fa-icon "folder-open" size=1}}
+        {{else}}
+            {{fa-icon "folder" size=1}}
+        {{/if}}
+        <span>{{item.name}}</span>
     {{else}}
-    {{fa-icon "folder" size=1}}
-{{/if}}
-{{else}}
-    {{fa-icon "music" size=1}}
-{{/if}}
-<span>{{item.name}}</span>
+        {{fa-icon "music" size=1}}
+        {{#play-queue-helper search=true replace=false play=true type="track" objectId=item.id}}{{item.name}}{{/play-queue-helper}}
+    {{/if}}
 </div>
 {{#if isOpen}}
     {{folder-view prefix=prefix}}
