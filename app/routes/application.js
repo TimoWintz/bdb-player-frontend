@@ -3,11 +3,6 @@ import Ember from 'ember';
 export default Ember.Route.extend({
     queue: Ember.inject.service('play-queue'),
     filter: Ember.inject.service(),
-    actions : {
-        clearFilter() {
-            this.set("filter.filter", "");
-        }
-    },
     setupController: function(controller, model) {
         this._super(controller, model);
         this.get('queue.playingIndex');
