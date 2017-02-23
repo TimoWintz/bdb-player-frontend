@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import SendQueueMixin from '../mixins/send-queue';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(SendQueueMixin, {
     showAlbum: false,
     selectedAlbum: null,
     actions : {

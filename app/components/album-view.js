@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import SendQueueMixin from '../mixins/send-queue';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(SendQueueMixin, {
     store: Ember.inject.service(),
     loading: true,
     cMenu: Ember.inject.service("context-menu-service"),

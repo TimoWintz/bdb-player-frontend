@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <div class="media">
+        <div class="media album-list-item">
             <div class="media-left">
                 {{#play-queue-helper replace=true play=true type="album" objectId=album.id}}<img src="/assets/images/albumicon.svg">{{/play-queue-helper}}
             </div>
@@ -13,17 +13,17 @@
             </div>
         </div>
     </div>
-                    <div class="btn-group-panel btn-group btn-group-justified">
-                        {{#play-queue-helper class="btn btn-default" replace=false play=false type="album" objectId=album.id}}
-                            {{fa-icon "plus"}} Add to queue
-                        {{/play-queue-helper}}
-                        {{#play-queue-helper class="btn btn-default" replace=false play=true type="album" objectId=album.id}}
-                            {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
-                        {{/play-queue-helper}}
-                        {{#play-queue-helper class="btn btn-default" replace=true play=true type="album" objectId=album.id}}
-                            {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
-                        {{/play-queue-helper}}
-                    </div>
+    <div class="btn-group-panel btn-group btn-group-justified">
+        <div class="btn btn-default" {{action "send" false false "album" false album.id}}>
+            {{fa-icon "plus"}} Add to queue
+        </div>
+        <div class="btn btn-default" {{action "send" false true "album" false album.id}}>
+            {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
+        </div>
+        <div class="btn btn-default" {{action "send" true true "album" false album.id}}>
+            {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
+        </div>
+    </div>
     <table class="table relaxed table-hover">
         <thead>
         </thead>
@@ -36,8 +36,7 @@
                 </tr>
             {{/if}}
             {{#each tracks as |track|}} 
-                {{#context-menu-zone tagName="tr" type="track" objectId=track.id}}
-                {{#play-queue-helper tagName="tr" search=true replace=false play=true type="track" objectId=track.id}}
+                {{#context-menu-zone class="pointer-cursor" tagName="tr" type="track" objectId=track.id action=(action "send" false true "track" true track.id)}}
                     <td class="track">
                         {{track.track}}
                     </td>
@@ -47,9 +46,7 @@
                     <td class="duration">
                         {{format-duration track.length "sec"}}
                     </td>
-                {{/play-queue-helper}}
                 {{/context-menu-zone}}
-
             {{/each}}
         </tbody>
     </table>

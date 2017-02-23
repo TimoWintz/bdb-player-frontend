@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import SendQueueMixin from '../mixins/send-queue';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(SendQueueMixin, {
     prefix : "",
     item : null,
     isOpen : false,

@@ -162,6 +162,66 @@ export default Ember.Service.extend({
             return this.play();
         }
         return RSVP.resolve();
+    },
+    send(replace, play, type, search, id) {
+        //This function looks in the database for requested items and adds them to the queue
+        if (replace) {
+            this.empty();
+            this.stop();
+        }
+        var numberOfTracks = this.get('items').length;
+        var first = true;
+        var album;
+        if (type === "album") {
+            album = this.get('store').query('item', {filter : {album_id : id}}); 
+            album.then(function() {
+                album.map(function(item) {
+                    this.add(item);
+                    if (first && play) {
+                        this.set('playingIndex', numberOfTracks);
+                        this.play();
+                    }
+                    first = false;
+                }.bind(this));
+            }.bind(this));
+        } else if (type === "track") {
+            var foundTrack = false;
+            var track = this.get('store').find('item', id);
+            track.then(function(value) {
+                if (search) {
+                    var items = this.get('items');
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i].track.get('id') === value.get('id')) {
+                            this.set('playingIndex', items[i].index);
+                            this.stop();
+                            this.play();
+                            foundTrack = true;
+                            break;
+                        }
+                    }
+                }
+                if (!foundTrack) {
+                    this.add(value);
+                    if (play) {
+                        this.set('playingIndex', numberOfTracks);
+                        this.stop();
+                        this.play();
+                    }
+                }
+            }.bind(this));
+        } else if (type === "path") {
+            album = this.get('store').query('item', {filter : {path : id}}); 
+            album.then(function() {
+                album.map(function(item) {
+                    this.add(item);
+                    if (first && play) {
+                        this.set('playingIndex', numberOfTracks);
+                        this.play();
+                    }
+                    first = false;
+                }.bind(this));
+            }.bind(this));
+        }
     }
 
 });

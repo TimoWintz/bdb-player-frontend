@@ -240,3 +240,15 @@ a {
 .list-group-item a {
     margin-left: 10px;
 }
+.pointer-cursor {
+    cursor: pointer;
+}
+.album-list-item .media-left {
+    padding-right: 0;
+}
+.album-list-item .media-left:hover {
+    background: #CCC;
+}
+.album-list-item .media-body {
+    padding-left: 10px;
+}

@@ -2,19 +2,19 @@
     {{#if cMenu.isShown}}
         <ul class="dropdown-menu" style="display:block">
             <li>
-                    {{#play-queue-helper replace=false play=false type=cMenu.type objectId=cMenu.objectId}}
-                        {{fa-icon "plus"}} Add to queue
-                    {{/play-queue-helper}}
-            <li>
+                <a {{action "send" false false cMenu.type false cMenu.objectId}}>
+                    {{fa-icon "plus"}} Add to queue
+                </a>
             </li>
-                    {{#play-queue-helper replace=false play=true type=cMenu.type objectId=cMenu.objectId}}
-                        {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
-                    {{/play-queue-helper}}
             <li>
+                <a {{action "send" false true cMenu.type false cMenu.objectId}}>
+                    {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
+                </a>
             </li>
-                    {{#play-queue-helper replace=true play=true type=cMenu.type objectId=cMenu.objectId}}
-                        {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
-                    {{/play-queue-helper}}
+            <li>
+                <a {{action "send" true true cMenu.type false cMenu.objectId}}>
+                    {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
+                </a>
             </li>
         </ul>
     {{/if}}

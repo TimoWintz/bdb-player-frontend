@@ -10,5 +10,8 @@ export default Ember.Component.extend({
         this.set('cMenu.objectId', this.get('objectId'));
         this.get('cMenu').openMenu(ev.clientX, ev.clientY);
         return false;
+    },
+    click() {
+        this.sendAction('action');
     }
 });

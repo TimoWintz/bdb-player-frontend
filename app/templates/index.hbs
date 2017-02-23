@@ -1,11 +1,11 @@
 <div class="panel panel-default">
     <div class="list-group">
         {{#each model key="id" as |album|}} 
-            {{#context-menu-zone type="album" objectId=album.id}}
+            {{#context-menu-zone class="pointer-cursor" type="album" objectId=album.id}}
             <div href="#" class="list-group-item">
-                <div class="media">
-                    <div class="media-left">
-                        {{#play-queue-helper replace=true play=true type="album" objectId=album.id}}<img src="/assets/images/albumicon.svg">{{/play-queue-helper}}
+                <div class="media album-list-item">
+                    <div class="media-left hover-play" {{action "send" true true "album" false album.id}}>
+                        <img src="/assets/images/albumicon.svg">
                     </div>
                     <div class="media-body" {{action "toggleAlbum" album.id}}>
                         <h4>{{album.album}}</h4>
