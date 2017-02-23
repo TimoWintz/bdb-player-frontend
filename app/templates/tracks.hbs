@@ -1,4 +1,4 @@
-<table class="table-hover table">
+<table class="table-hover table pointer-cursor">
     <tbody>
         {{#each model as |item|}}
             {{#context-menu-zone tagName="tr" class="nowrap" type="track" objectId=item.id action=(action "send" false true "track" true item.id)}}
