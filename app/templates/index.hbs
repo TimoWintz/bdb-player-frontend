@@ -4,7 +4,7 @@
             {{#context-menu-zone class="pointer-cursor" type="album" objectId=album.id}}
             <div href="#" class="list-group-item">
                 <div class="media album-list-item">
-                    <div class="media-left hover-play" {{action "send" true true "album" false album.id}}>
+                    <div class="media-left" {{action "send" true true "album" false album.id}}>
                         <img src="/assets/images/albumicon.svg">
                     </div>
                     <div class="media-body" {{action "toggleAlbum" album.id}}>
