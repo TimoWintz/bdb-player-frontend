@@ -1,50 +1,55 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="media">
-			<div class="media-left">
-				{{#play-queue-helper replace=true play=true type="album" objectId=album.id}}<img src="/assets/images/albumicon.svg">{{/play-queue-helper}}
-			</div>
-			<div class="media-body">
-				<h4>{{album.album}}</h4>
-				{{album.albumartist}}
-			</div>
-			<div class="media-right">
-				{{album.year}}
-			</div>
-		</div>
-	</div>
-    <div class="btn-group-panel btn-group btn-group-justified">
-        {{#play-queue-helper class="btn btn-default" replace=false play=false type="album" objectId=album.id}}
-            {{fa-icon "plus"}} Add to queue
-        {{/play-queue-helper}}
-        {{#play-queue-helper class="btn btn-default" replace=false play=true type="album" objectId=album.id}}
-            {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
-        {{/play-queue-helper}}
-        {{#play-queue-helper class="btn btn-default" replace=true play=true type="album" objectId=album.id}}
-            {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
-    {{/play-queue-helper}}
+            <div class="media-left">
+                {{#play-queue-helper replace=true play=true type="album" objectId=album.id}}<img src="/assets/images/albumicon.svg">{{/play-queue-helper}}
+            </div>
+            <div class="media-body">
+                <h4>{{album.album}}</h4>
+                {{album.albumartist}}
+            </div>
+            <div class="media-right">
+                {{album.year}}
+            </div>
+        </div>
     </div>
+                    <div class="btn-group-panel btn-group btn-group-justified">
+                        {{#play-queue-helper class="btn btn-default" replace=false play=false type="album" objectId=album.id}}
+                            {{fa-icon "plus"}} Add to queue
+                        {{/play-queue-helper}}
+                        {{#play-queue-helper class="btn btn-default" replace=false play=true type="album" objectId=album.id}}
+                            {{fa-icon "plus"}} {{fa-icon "play"}} Add and play
+                        {{/play-queue-helper}}
+                        {{#play-queue-helper class="btn btn-default" replace=true play=true type="album" objectId=album.id}}
+                            {{fa-icon "recycle"}} {{fa-icon "play"}} Replace and play
+                        {{/play-queue-helper}}
+                    </div>
     <table class="table relaxed table-hover">
+        <thead>
+        </thead>
         <tbody>
             {{#if loading}}
-            <tr>
-                <td colspan=3>
-                    <i class="fa fa-spinner fa-spin fa-2x"></i>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan=3>
+                        <i class="fa fa-spinner fa-spin fa-2x"></i>
+                    </td>
+                </tr>
             {{/if}}
             {{#each tracks as |track|}} 
                 {{#context-menu-zone tagName="tr" type="track" objectId=track.id}}
+                {{#play-queue-helper tagName="tr" search=true replace=false play=true type="track" objectId=track.id}}
                     <td class="track">
                         {{track.track}}
                     </td>
                     <td>
-                        {{#play-queue-helper search=true replace=false play=true type="track" objectId=track.id}}{{track.title}}{{/play-queue-helper}}
+                        {{track.title}}                    
                     </td>
                     <td class="duration">
                         {{format-duration track.length "sec"}}
                     </td>
+                {{/play-queue-helper}}
                 {{/context-menu-zone}}
+
             {{/each}}
         </tbody>
     </table>
