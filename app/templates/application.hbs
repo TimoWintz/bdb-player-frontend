@@ -3,13 +3,13 @@
     <div class="container-fluid">
         {{#bs-nav type="tabs"}}
             {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "index" (action "clear")}}Albums{{/link-to}}
+                {{#link-to "index" invokeAction=(action 'clear')}}Albums{{/link-to}}
             {{/bs-nav-item}}
             {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "albums" (action "clear")}}Tracks{{/link-to}}
+                {{#link-to "tracks" invokeAction=(action 'clear')}}Tracks{{/link-to}}
             {{/bs-nav-item}}
             {{#bs-nav-item class="navbar-btn"}}
-                {{#link-to "folders" (action "clear")}}Folders{{/link-to}}
+                {{#link-to "folders" invokeAction=(action 'clear')}}Folders{{/link-to}}
             {{/bs-nav-item}}
         {{/bs-nav}}
     </div>

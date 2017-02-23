@@ -39,6 +39,7 @@
     "ember-font-awesome": "2.2.0",
     "ember-hifi": "1.5.0",
     "ember-infinity": "0.2.7",
+    "ember-link-action": "0.0.35",
     "ember-load-initializers": "^0.5.1",
     "ember-network": "0.3.1",
     "ember-resolver": "^2.0.3",
