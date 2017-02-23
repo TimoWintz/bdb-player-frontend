@@ -4,16 +4,16 @@
         <div class="spacer1">
         </div>    
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
-            <a {{action "toggle" "shuffle"}} class={{if queue.shuffle "btn btn-primary active" "btn btn-primary"}}>
+            <a {{action "toggle" "shuffle"}} class={{if queue.shuffle "btn btn-primary active" "btn btn-primary"}} aria-label="Shuffle" title="Shuffle">
                 {{fa-icon "random"}}
             </a>
-            <a {{action "toggle" "repeat"}} class={{if queue.repeat "btn btn-primary active" "btn btn-primary"}}>
+            <a {{action "toggle" "repeat"}} class={{if queue.repeat "btn btn-primary active" "btn btn-primary"}} aria-label="Repeat" title="Repeat">
                 {{fa-icon "repeat"}}
             </a>
-            <a {{action "toggle" "continue"}} class={{if queue.continue "btn btn-primary active" "btn btn-primary"}}>
+            <a {{action "toggle" "continue"}} class={{if queue.continue "btn btn-primary active" "btn btn-primary"}} aria-label="Continue album" title="Continue album">
                 {{fa-icon "arrow-circle-o-right"}}
             </a>
-            <a {{action "emptyQueue"}} class="btn btn-primary">
+            <a {{action "emptyQueue"}} class="btn btn-primary" aria-label="Empty queue" title="Empty queue">
                 {{fa-icon "recycle"}}
             </a>
         </div>  

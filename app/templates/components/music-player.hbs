@@ -20,19 +20,19 @@
     {{track-progress class="track-progress" position=hifi.position duration=hifi.duration}}
 </div>
 <div class="btn-group btn-group-justified">
-    <a {{action "previous"}} type="button" class="btn btn-primary">
+    <a {{action "previous"}} type="button" class="btn btn-primary" aria-label="Previous track" title="Previous track">
         {{fa-icon "step-backward"}}
     </a>
     {{#if hifi.isPlaying}}
-        <a {{action "pause"}} type="button" class="btn btn-primary">
+        <a {{action "pause"}} type="button" class="btn btn-primary" aria-label="Pause" title="Pause">
         {{fa-icon "pause"}}
         </a>
     {{else}}
-        <a {{action "play"}} type="button" class="btn btn-primary">
+        <a {{action "play"}} type="button" class="btn btn-primary" aria-label="Play" title="Play">
         {{fa-icon "play"}}
         </a>
     {{/if}}
-    <a {{action "skip"}} type="button" class="btn btn-primary">
+    <a {{action "skip"}} type="button" class="btn btn-primary" aria-label="Next track" title="Next track">
         {{fa-icon "step-forward"}}
     </a>
 </div>
