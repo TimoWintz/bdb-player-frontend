@@ -80,7 +80,7 @@ export default Ember.Service.extend({
             this.stop();
             return new RSVP.Promise(function(resolve, reject) {
                 if (item) {
-                    let url = '/file/' + item.track.get('id').toString();
+                    let url = '/file/' + item.track.get('id').toString() + '.' + item.track.get('format').toLowerCase();
                     this.get('hifi').play(url).then(({sound}) => {
                         sound.set('track', item.track);
                         sound.on('audio-ended', () => { 
